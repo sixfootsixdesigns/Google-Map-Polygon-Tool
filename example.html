@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Polygon Tool</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      button {
+        background-color: green;
+        color: #fff;
+        padding: 10px 15px;
+        border: none;
+        cursor: pointer;
+      }
+      #polygon-tool {
+        padding: 5px;
+      }
+      .polygon-tool-btn {
+        display: none;
+      }
+      .polygon-tool-btn.enabled {
+        display: inline-block;
+      }
+      .polygon-tool-edit-delete {
+        display: none;
+      }
+      .polygon-tool-edit-delete.active {
+        display: block;
+      }
+      #polygon-help {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: #efefef;
+        padding: 15px;
+        display: none;
+      }
+      #polygon-help.active {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+<div id="polygon-help">
+    <p>Click points on the map to start the polygon. double click points to remove.</p>
+    <button type="button" data-action="complete-polygon" title="Complete">Complete</button>
+    <button type="button" data-action="delete-polygon" title="Remove">Remove</button>
+</div>
+<script>
+      var map
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -34.397, lng: 150.644},
+          zoom: 8
+        });
+
+        var polygonTool = new PolygonTool();
+        var controls = polygonTool.render();
+        map.controls[google.maps.ControlPosition['TOP_RIGHT']].push(controls[0]);
+        
+      }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async defer></script>
+    <script src="google-maps-polygon-manager.js"></script>
+    <script src="manager.js"></script>
+  </body>
+</html>
